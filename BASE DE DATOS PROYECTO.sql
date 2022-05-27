@@ -27,6 +27,7 @@ CREATE TABLE Pagos (
   Apellidos_Supervisor VARCHAR(50) NOT NULL,
   Sueldo_Base INT(10) NOT NULL,
   Bonificacion INT(10) NOT NULL,
+  Comision FLOAT(10) NOT NULL,
   IGSS FLOAT(10) NOT NULL,
   ISR FLOAT(10) NOT NULL,
   IRTRA FLOAT(10) NOT NULL,
