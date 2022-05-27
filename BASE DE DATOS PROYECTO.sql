@@ -26,7 +26,6 @@ CREATE TABLE Ventas (
 
 CREATE TABLE Pagos (
   codigo_pagos INT  PRIMARY KEY,
-  codigo_venta INT   PRIMARY KEY,
   Apellidos_Supervisor VARCHAR(50) NOT NULL,
   Sueldo_Base INT(10) NOT NULL,
   Bonificacion INT(10) NOT NULL,
@@ -35,10 +34,12 @@ CREATE TABLE Pagos (
   ISR FLOAT(10) NOT NULL,
   IRTRA FLOAT(10) NOT NULL,
   Liquido_A_Recibir FLOAT(10) NOT NULL,
-  FOREIGN KEY (Pagos) REFERENCES Ventas (codigo_venta)
+  
+  FOREIGN KEY (codigo_pagos) REFERENCES Supervisores (codigo_Supervisores)
   
 )ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
+/*
 INSERT INTO departamento VALUES(1, 'Desarrollo', 120000, 6000);
 INSERT INTO departamento VALUES(2, 'Sistemas', 150000, 21000);
 INSERT INTO departamento VALUES(3, 'Recursos Humanos', 280000, 25000);
@@ -55,5 +56,5 @@ INSERT INTO empleado VALUES(5, '17087203C', 'Marcos', 'Loyola', 'Méndez', 5);
 INSERT INTO empleado VALUES(6, '38382980M', 'María', 'Santana', 'Moreno', 1);
 INSERT INTO empleado VALUES(7, '80576669X', 'Pilar', 'Ruiz', NULL, 2);
 INSERT INTO empleado VALUES(8, '54659821D', 'Palacios', 'Jose', NULL, 5);
-
+*/
 
