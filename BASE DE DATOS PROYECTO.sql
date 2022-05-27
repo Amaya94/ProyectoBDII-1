@@ -38,22 +38,45 @@ CREATE TABLE Pagos (
   FOREIGN KEY (codigo_pagos) REFERENCES Supervisores (codigo_Supervisores)
 )ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
+
+
+
+
+
+
+
+
+
+
+/*------------------------STORED PROCEDURES----------------------------------------------*/
+CREATE DEFINER=`root`@`localhost` PROCEDURE `promedio_venta`
+(in promedio int, in supervisor float, in meta int)
+BEGIN
+/*Hay un mínimo de promedios de ventas mensuales que debe cumplir cada supervisor de área. 
+Obviamente, este promedio mínimo varía según el área que supervisa. */
 /*
-INSERT INTO departamento VALUES(1, 'Desarrollo', 120000, 6000);
-INSERT INTO departamento VALUES(2, 'Sistemas', 150000, 21000);
-INSERT INTO departamento VALUES(3, 'Recursos Humanos', 280000, 25000);
-INSERT INTO departamento VALUES(4, 'Contabilidad', 110000, 3000);
-INSERT INTO departamento VALUES(5, 'I+D', 375000, 380000);
-INSERT INTO departamento VALUES(6, 'Proyectos', 0, 0);
-INSERT INTO departamento VALUES(7, 'Publicidad', 0, 1000);
-
-INSERT INTO empleado VALUES(1, '32481596F', 'Aarón', 'Rivero', 'Gómez', 1);
-INSERT INTO empleado VALUES(2, 'Y5575632D', 'Adela', 'Salas', 'Díaz', 2);
-INSERT INTO empleado VALUES(3, 'R6970642B', 'Adolfo', 'Rubio', 'Flores', 3);
-INSERT INTO empleado VALUES(4, '77705545E', 'Adrián', 'Suárez', NULL, 4);
-INSERT INTO empleado VALUES(5, '17087203C', 'Marcos', 'Loyola', 'Méndez', 5);
-INSERT INTO empleado VALUES(6, '38382980M', 'María', 'Santana', 'Moreno', 1);
-INSERT INTO empleado VALUES(7, '80576669X', 'Pilar', 'Ruiz', NULL, 2);
-INSERT INTO empleado VALUES(8, '54659821D', 'Palacios', 'Jose', NULL, 5);
+   DECLARE jardineria int;
+   DECLARE electronicos int;
+   DECLARE ferreteria int;
+   DECLARE supervisor int;
+   DECLARE descuento float;
+   DECLARE IRTRA float;
+   DECLARE ISR float;
+   DECLARE IGSS float;
+   DECLARE total float;
+   DECLARE subtotal float;
+   SET subtotal=supervisor;
+	/*
+   IF jardineria >= 3000 THEN
+      SELECT cliente_id FROM pedidos WHERE pedido_id=numpedido INTO cliente;
+      SET descuento=tot_factura*0.10;
+      SET subtotal=tot_factura-descuento;
+   END IF;
+   SET IVA=subtotal*0.12;
+   SET Total=subtotal+IVA;
+   INSERT INTO factura VALUES (numfact, numpedido, cliente, subtotal, IVA, total);
+   UPDATE pedidos set Status=1 WHERE pedido_id=numpedido;
+   SELECT * FROM factura;
+   SELECT * FROM pedidos;
 */
-
+END
