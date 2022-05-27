@@ -3,18 +3,18 @@ CREATE DATABASE ProyectoFinal_2 CHARACTER SET utf8mb4;
 USE ProyectoFinal_2;
 
 CREATE TABLE Supervisores (
-  codigo INT  AUTO_INCREMENT PRIMARY KEY,
-  Nombres VARCHAR(50) NOT NULL,
-  Apellidos VARCHAR(50) NOT NULL,
-  Telefono INT(10) NOT NULL,
+  codigo_Supervisores INT  AUTO_INCREMENT PRIMARY KEY,
+  Nombres_Supervisor VARCHAR(50) NOT NULL,
+  Apellidos_Supervisor VARCHAR(50) NOT NULL,
+  Telefono_Supervisor INT(10) NOT NULL,
   Area VARCHAR(50) NOT NULL,
   Meses_Laborados INT(10) NOT NULL,
-  Estatus VARCHAR(20) NOT NULL
+  Estatus_Supervisores VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE Ventas (
-  codigo INT   PRIMARY KEY,
-  Apellidos VARCHAR(50) NOT NULL,
+  codigo_venta INT   PRIMARY KEY,
+  Apellidos_Supervisor VARCHAR(50) NOT NULL,
   Sueldo INT(10) NOT NULL,
   Ventas_Actuales INT(10) NOT NULL,
   Meta INT(10) NOT NULL,
@@ -23,8 +23,8 @@ CREATE TABLE Ventas (
 );
 
 CREATE TABLE Pagos (
-  codigo INT  PRIMARY KEY,
-  Apellidos VARCHAR(50) NOT NULL,
+  codigo_pagos INT  PRIMARY KEY,
+  Apellidos_Supervisor VARCHAR(50) NOT NULL,
   Sueldo_Base INT(10) NOT NULL,
   Bonificacion INT(10) NOT NULL,
   IGSS FLOAT(10) NOT NULL,
