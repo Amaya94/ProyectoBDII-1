@@ -36,7 +36,6 @@ CREATE TABLE Pagos (
   Liquido_A_Recibir FLOAT(10) NOT NULL,
   
   FOREIGN KEY (codigo_pagos) REFERENCES Supervisores (codigo_Supervisores)
-  
 )ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
 /*
