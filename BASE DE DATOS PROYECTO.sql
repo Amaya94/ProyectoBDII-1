@@ -1,22 +1,36 @@
-DROP DATABASE IF EXISTS empleados;
-CREATE DATABASE empleados CHARACTER SET utf8mb4;
-USE empleados;
+DROP DATABASE IF EXISTS ProyectoFinal_2;
+CREATE DATABASE ProyectoFinal_2 CHARACTER SET utf8mb4;
+USE ProyectoFinal_2;
 
-CREATE TABLE departamento (
-  codigo INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  nombre VARCHAR(100) NOT NULL,
-  presupuesto DOUBLE UNSIGNED NOT NULL,
-  gastos DOUBLE UNSIGNED NOT NULL
+CREATE TABLE Supervisores (
+  codigo INT  AUTO_INCREMENT PRIMARY KEY,
+  Nombres VARCHAR(50) NOT NULL,
+  Apellidos VARCHAR(50) NOT NULL,
+  Telefono INT(10) NOT NULL,
+  Area VARCHAR(50) NOT NULL,
+  Meses_Laborados INT(10) NOT NULL,
+  Estatus VARCHAR(20) NOT NULL
 );
 
-CREATE TABLE empleado (
-  codigo INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  nif VARCHAR(9) NOT NULL UNIQUE,
-  nombre VARCHAR(100) NOT NULL,
-  apellido1 VARCHAR(100) NOT NULL,
-  apellido2 VARCHAR(100),
-  codigo_departamento INT UNSIGNED,
-  FOREIGN KEY (codigo_departamento) REFERENCES departamento(codigo)
+CREATE TABLE Ventas (
+  codigo INT   PRIMARY KEY,
+  Apellidos VARCHAR(50) NOT NULL,
+  Sueldo INT(10) NOT NULL,
+  Ventas_Actuales INT(10) NOT NULL,
+  Meta INT(10) NOT NULL,
+  Bonificacion INT(10) NOT NULL,
+  Metas_No_Alcanzadas INT(5) NOT NULL
+);
+
+CREATE TABLE Pagos (
+  codigo INT  PRIMARY KEY,
+  Apellidos VARCHAR(50) NOT NULL,
+  Sueldo_Base INT(10) NOT NULL,
+  Bonificacion INT(10) NOT NULL,
+  IGSS FLOAT(10) NOT NULL,
+  ISR FLOAT(10) NOT NULL,
+  IRTRA FLOAT(10) NOT NULL,
+  Liquido_A_Recibir FLOAT(10) NOT NULL
 );
 
 INSERT INTO departamento VALUES(1, 'Desarrollo', 120000, 6000);
@@ -35,3 +49,5 @@ INSERT INTO empleado VALUES(5, '17087203C', 'Marcos', 'Loyola', 'Méndez', 5);
 INSERT INTO empleado VALUES(6, '38382980M', 'María', 'Santana', 'Moreno', 1);
 INSERT INTO empleado VALUES(7, '80576669X', 'Pilar', 'Ruiz', NULL, 2);
 INSERT INTO empleado VALUES(8, '54659821D', 'Palacios', 'Jose', NULL, 5);
+
+
