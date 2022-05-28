@@ -33,6 +33,7 @@ CREATE TABLE Pagos (
   IGSS FLOAT(10) NOT NULL,
   ISR FLOAT(10) NOT NULL,
   IRTRA FLOAT(10) NOT NULL,
+  /*sat*/
   Liquido_A_Recibir FLOAT(10) NOT NULL,
   
   FOREIGN KEY (codigo_pagos) REFERENCES Supervisores (codigo_Supervisores)
