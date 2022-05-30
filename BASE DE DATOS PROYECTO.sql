@@ -128,6 +128,3 @@ END$$
 DELIMITER ;
 
 CALL calc_comisiones;
-SELECT * FROM Pagos;
-SELECT * FROM Ventas;
-SELECT * FROM Supervisores;
