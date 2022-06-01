@@ -8,7 +8,7 @@ CREATE TABLE Supervisores (
   Nombres_Supervisor VARCHAR(50) NOT NULL,
   Apellidos_Supervisor VARCHAR(50) NOT NULL,
   Telefono_Supervisor INT(10) NOT NULL,
-  Area_Supervisor VARCHAR(50) NOT NULL,
+  Area VARCHAR(50) NOT NULL,
   Meses_Laborados INT(10) NOT NULL,
   Estatus_Supervisores VARCHAR(20) NOT NULL
 )ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
@@ -61,18 +61,70 @@ SELECT * FROM Pagos;
 USE `proyectofinal_2`;
 DROP procedure IF EXISTS `calc_comisiones`;
 
-USE `proyectofinal_2`;
-DROP procedure IF EXISTS `calc_comisiones`;
+DELIMITER $$
+USE `proyectofinal_2`$$
+CREATE PROCEDURE `calc_comisiones` ()
+BEGIN
+	DECLARE Tot_Desc FLOAT;
+    DECLARE Comision INT;
+    DECLARE IGSS, IRTRA, ISR, Liquido_A_Recibir FLOAT;
+    
+	SELECT Apellidos_Supervisor, Sueldo, Bonificacion, codigo_ventas FROM Ventas;
+    SELECT Area, Estatus_Supervisores, codigo_Supervisores FROM Supervisores;
+    SELECT Ventas_Actuales, Metas_No_Alcanzadas FROM Ventas;
+    
+    IF @Area = 'JARDINERIA' THEN
+		IF @Ventas_Actuales >= 1000 AND @Ventas_Actuales <3000 THEN
+			SET Comision = 100;
+		END IF;
+		IF @Ventas_Actuales >= 3001 AND @Ventas_Actuales <5000 THEN
+			SET Comision = 300;
+		END IF;
+		IF @Ventas_Actuales >= 5001 AND @Ventas_Actuales <8000 THEN
+			SET Comision = 500;
+		END IF;
+        IF @Ventas_Actuales >= 8001 AND @Ventas_Actuales <10000 THEN
+			SET Comision = 700;
+		END IF;
+        IF @Ventas_Actuales >= 10001 THEN
+			SET Comision = 1000;
+		END IF;
+		SET IGSS = Sueldo * 0.0487;
+        SET IRTRA = Sueldo * 0.01;
+        SET ISR = Sueldo * 0.01;
+        SET Tot_Desc = IGSS+IRTRA+ISR;
+        
+        IF @Metas_No_Alcanzadas = 0 THEN
+			SET Liquido_A_Recibir = (Sueldo_Base - Tot_Desc) + Comision + Bonificacion;
+		END IF;
+        IF @Metas_No_Alcanzadas = 1 THEN
+			SET Liquido_A_Recibir = (Sueldo_Base - Tot_Desc) + Bonificacion;
+		END IF;
+        IF @Metas_No_Alcanzadas = 2 THEN
+			SET Liquido_A_Recibir = 0;
+		END IF;
+        IF @Metas_No_Alcanzadas >= 3 THEN
+			SET Liquido_A_Recibir = 0;
+		END IF;
 
-USE `proyectofinal_2`;
-DROP procedure IF EXISTS `calc_comisiones`;
+		IF @Metas_No_Alcanzadas >= 3 THEN
+			UPDATE Supervisores
+            SET Estatus_Supervisores = 'BAJA'
+            WHERE codigo_Supervisores = codigo_pagos ;
+		END IF;
+        
+        IF @codigo_pagos = @codigo_Supervisores THEN
+			UPDATE Pagos
+			SET Comision = @comision;
+			SET IGSS = @IGSS;
+			SET ISR = @ISR;
+			SET IRTRA = @IRTRA;
+			SET Liquido_A_Recibir = @Liquido_A_Recibir;
+			/*WHERE codigo_Pagos = codigo_Supervisores;*/
+		END IF;
+        END IF;
+END$$
 
+DELIMITER ;
 
-USE `proyectofinal_2`;
-DROP procedure IF EXISTS `comisiones_supervisores`;
-
--- --------------------------------------------------------------------------------------------
-
-
-
-
+CALL calc_comisiones;
