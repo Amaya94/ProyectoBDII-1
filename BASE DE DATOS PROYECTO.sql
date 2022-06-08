@@ -80,16 +80,14 @@ DROP procedure IF EXISTS `calculo_comisiones`;
 DELIMITER $$
 USE `proyectofinal_2`$$
 CREATE PROCEDURE `calculo_comisiones` (IN codigo_pagos INT)
-BEGIN
-
-	
+BEGIN	
 	DECLARE SueldoT, VentasAT, MetaT, BonificacionT, MTNA, ComisionT FLOAT;
     DECLARE Tot_Desc, IGSST, IRTRAT, ISRT, Liquido FLOAT;
     DECLARE AreaT VARCHAR(100);
     DECLARE contador_supervisor INT;
     CREATE TEMPORARY TABLE IF NOT EXISTS Supervisores_temporary AS (SELECT * FROM Supervisores);
     CREATE TEMPORARY TABLE IF NOT EXISTS ventas_temporary AS (SELECT * FROM ventas);
-
+	CREATE TEMPORARY TABLE IF NOT EXISTS pagos_temporary AS (SELECT * FROM pagos);
     
 	/*SELECT Sueldo, Ventas_Actuales, Meta, Bonificacion, Metas_No_Alcanzadas 
 	INTO SueldoT, VentasAT, MetaT, BonificacionT, MTNA FROM ventas;
@@ -98,7 +96,7 @@ BEGIN
     
 	SELECT COUNT(1) INTO contador_supervisor FROM Supervisores_temporary;
 		
-	IF LOWER(AreaT) = 'jardineria' THEN
+	IF LOWER(AreaT) = 'JARDINERIA' THEN
 		IF Ventas_Actuales >= 1000 AND Ventas_Actuales <3000 THEN
 			SET ComisionT = 100;
 	    ELSEIF Ventas_Actuales  >= 3001 AND Ventas_Actuales <5000 THEN
@@ -138,4 +136,4 @@ BEGIN
 END$$
 DELIMITER ;
 call proyectofinal_2.calculo_comisiones(28);
-SELECT * FROM pagos
+SELECT * FROM pagos;
